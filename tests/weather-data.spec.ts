@@ -27,9 +27,6 @@ test.describe('test of weather for city', () => {
   })
   test('mean temperature logic with one day from past', async ({ page }) => {
     const buttonGetWeather = page.locator('#get-weather')
-    const temp0 = page.locator('#temperature-0')
-    const temp1 = page.locator('#temperature-1')
-    const temp2 = page.locator('#temperature-2')
     const tempMean = page.locator('#meanTemperature')
     const getOneMoreDayButton = page.locator('#get-weather-past-day')
 
