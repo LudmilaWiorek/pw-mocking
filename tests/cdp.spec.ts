@@ -71,4 +71,20 @@ test.describe('CDP communication', () => {
     const metrics = await cdpSession.send('Performance.getMetrics')
     console.log(metrics)
   })
+  // dark mode?
+  test('dark mode', async ({ context, page }) => {
+    const getWeatherButton = page.locator('#get-weather')
+    const tableOfWeather = page.locator('#results-table')
+    await page.goto('/practice/random-weather-v2.html')
+
+    const cdpSession = await context.newCDPSession(page)
+    await cdpSession.send('Emulation.setAutoDarkModeOverride', {
+      enabled: true,
+    })
+
+    await page.waitForLoadState('domcontentloaded')
+    await getWeatherButton.click()
+
+    await expect(tableOfWeather).toBeVisible()
+  })
 })
